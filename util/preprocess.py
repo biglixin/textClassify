@@ -1,5 +1,31 @@
 # coding=utf-8
 import jieba
+import math
+
+def performance(labelArr, predictArr):#类标签为int类型
+    #labelArr[i] is actual value,predictArr[i] is predict value
+    TP = 0.; TN = 0.; FP = 0.; FN = 0.
+    for i in range(len(labelArr)):
+        if labelArr[i] == '1' and predictArr[i] == '1':
+            TP += 1.
+        if labelArr[i] == '1' and predictArr[i] == '0':
+            FN += 1.
+        if labelArr[i] == '0' and predictArr[i] == '1':
+            FP += 1.
+        if labelArr[i] == '0' and predictArr[i] == '0':
+            TN += 1.
+    POSP = TP/(TP + FP)
+    POSN = TP / (TP + FN)
+    POSF1= 2*POSP*POSN/(POSP+POSN)
+
+    NEGP = TN/(FN + TN)
+    NEGN = TN/(FP + TN)
+    NEGF1=2*NEGP*NEGN/(NEGP+NEGN)
+
+    print("class"+"\t"+"precision"+"\t"+"recall"+"\t"+"f1-score")
+    print("1"+"\t"+str(POSP)+"\t"+str(POSN)+"\t"+str(POSF1))
+    print("0"+"\t"+str(NEGP)+"\t"+str(NEGN)+"\t"+str(NEGF1))
+
 
 
 
